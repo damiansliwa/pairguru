@@ -34,6 +34,9 @@ class TitleBracketsValidator < ActiveModel::Validator
       if title.include?(pair_brackets[bracket]) && !title.include?(bracket)
         return false
       end
+      if title.include?(bracket) && title.include?(pair_brackets[bracket])
+        return false if title.index(bracket) > title.index(pair_brackets[bracket])
+      end
     end
   end
 end
