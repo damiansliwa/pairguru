@@ -14,6 +14,6 @@ class TitleBracketsValidator < ActiveModel::Validator
   private
 
   def match_brackets(title)
-    title =~ /\[*]|{*}/
+    title =~ /\[*]|{*}|\(*\)/
   end
 end
