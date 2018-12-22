@@ -6,7 +6,9 @@ class TitleBracketsValidator < ActiveModel::Validator
   end
 
   def validate(record)
-  	if (!match_brackets(record.title)) 
+  	if (!has_closing_brackets?(record.title))
+      record.errors.add(:title, "has invalid title")
+    elsif (!match_brackets(record.title)) 
       record.errors.add(:title, "has invalid title")
     end
   end
@@ -15,5 +17,23 @@ class TitleBracketsValidator < ActiveModel::Validator
 
   def match_brackets(title)
     title =~ /\[*]|{*}|\(*\)/
+  end
+
+  def has_closing_brackets?(title)
+    pair_brackets = {
+      '(' => ')',
+      '[' => ']',
+      '{' => '}'
+    }
+
+    opening_brackets = pair_brackets.keys
+    opening_brackets.each do |bracket|
+      if (!title.include?(bracket) && !title.include?(pair_brackets[bracket]))
+        next
+      end
+      if title.include?(pair_brackets[bracket]) && !title.include?(bracket)
+        return false
+      end
+    end
   end
 end
