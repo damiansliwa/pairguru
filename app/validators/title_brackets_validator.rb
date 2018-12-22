@@ -40,6 +40,7 @@ class TitleBracketsValidator < ActiveModel::Validator
       if title.count(bracket) < title.count(pair_brackets[bracket])
         return false
       end
+      return false if title.count(bracket) > title.count(pair_brackets[bracket])
     end
   end
 end
