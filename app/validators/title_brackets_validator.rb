@@ -10,6 +10,8 @@ class TitleBracketsValidator < ActiveModel::Validator
       record.errors.add(:title, "has invalid title")
     elsif (match_empty_brackets?(record.title))
       record.errors.add(:title, "has invalid title")
+    elsif (!match_empty_brackets?(title))
+      return
     elsif (!match_brackets_with_content(record.title)) 
       record.errors.add(:title, "has invalid title")
     end
@@ -18,7 +20,7 @@ class TitleBracketsValidator < ActiveModel::Validator
   private
 
   def match_brackets_with_content(title)
-    title =~ /\[*]|{*}|\(*\)/
+    title =~ /\[*\]|{*}|\(*\)/
   end
 
   def match_empty_brackets?(title)
