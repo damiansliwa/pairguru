@@ -24,7 +24,7 @@ class TitleBracketsValidator < ActiveModel::Validator
   end
 
   def match_empty_brackets?(title)
-    title =~ Regexp.union('()', '[]', '{}')
+    MatchEmptyBracketsPolicy.new(title).apply?
   end
 
   def has_closing_brackets?(title)
