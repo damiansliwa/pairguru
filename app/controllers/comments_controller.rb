@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-  	@comment = Comment.find_by(params[:id])
+  	@comment = Comment.find(params[:id])
     if current_user.id == @comment.user_id
       @comment.destroy
       redirect_to movie_path(params[:movie_id]), notice: 'Your comment was successfully deleted.'

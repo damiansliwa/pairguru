@@ -20,4 +20,4 @@
         %td
           %p
             -if (user_signed_in? && (current_user.id == comment.user_id))
-              = link_to 'Delete', movie_comment_path(@movie.id), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: 'Are you sure?' }
+              = link_to 'Delete', movie_comment_path(@movie.id, comment.id), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: 'Are you sure?' }
