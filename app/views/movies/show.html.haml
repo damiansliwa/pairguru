@@ -19,5 +19,5 @@
             = comment.user.name
         %td
           %p
-            -if (user_signed_in? && (current_user.id == comment.user_id))
+            -if (user_signed_in? && current_user.is_comment_owner?(comment))
               = link_to 'Delete', movie_comment_path(@movie.id, comment.id), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: 'Are you sure?' }
