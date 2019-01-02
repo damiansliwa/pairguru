@@ -25,4 +25,10 @@ class User < ApplicationRecord
 
   validates :phone_number, format: { with: /\A[+]?\d+(?>[- .]\d+)*\z/, allow_nil: true }
   has_many :comments
+
+  def is_comment_owner?(comment)
+    id == comment.user_id
+  end
+
+  scope :by_comments_count, -> { joins(:comments).group('comments.user_id').order('COUNT(comments.id) DESC') }
 end
