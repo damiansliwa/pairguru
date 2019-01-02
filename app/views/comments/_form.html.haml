@@ -1,0 +1,6 @@
+= form_for @comment, url: movie_comments_path(@movie.id) do |f|
+  = f.hidden_field :user_id, { :value => current_user.id }
+  = f.hidden_field :movie_id, { :value => @movie.id }
+  = f.text_area :text
+  %p
+    = f.submit "Save", class: "btn btn-sm btn-default"
