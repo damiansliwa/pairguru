@@ -16,4 +16,6 @@ Rails.application.routes.draw do
       get :export
     end
   end
+
+  resources :ratings, only: [:index]
 end
